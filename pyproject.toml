@@ -1,0 +1,35 @@
+[project]
+name = "tadiran-ac"
+version = "0.1.0"
+description = "Command-line control for MyTadiran air conditioners."
+readme = "README.md"
+requires-python = ">=3.11"
+license = "MIT"
+license-files = ["LICENSE", "THIRD_PARTY_LICENSES/**", "THIRD_PARTY_NOTICES.md"]
+authors = [{ name = "Or Fadida", email = "or@fadida.net" }]
+dependencies = [
+    "aiohttp>=3.14.3",
+    "keyring>=25.7.0",
+    "platformdirs>=4.11.12",
+]
+keywords = [
+    "ac",
+    "air conditioner",
+    "cli",
+    "command line",
+    "mytadiran",
+    "tadiran",
+]
+
+[project.scripts]
+tadiran-ac = "tadiran_ac.cli:main"
+
+[build-system]
+requires      = ["hatchling>=1.27"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/tadiran_ac"]
+
+[tool.hatch.build.targets.wheel.force-include]
+"src/tadiran_ac/config.default.toml" = "tadiran_ac/config.default.toml"
