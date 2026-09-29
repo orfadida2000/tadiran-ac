@@ -218,3 +218,15 @@ The included device-resolution tests use only the Python standard library:
 ```powershell
 uv run python -m unittest discover -s tests
 ```
+
+## License
+
+This project is licensed under the MIT License.<br>
+See **[LICENSE](LICENSE)** for details.
+
+## Author
+
+- **Name:** Or Fadida
+- **Email:** [or@fadida.net](mailto:or@fadida.net)
+- **GitHub:** [orfadida2000](https://github.com/orfadida2000)
+- **Marketplace:** [orfadida](https://marketplace.visualstudio.com/publishers/orfadida)
