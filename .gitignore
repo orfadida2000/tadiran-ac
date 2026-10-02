@@ -319,7 +319,9 @@ pip-selfcheck.json
 *.orig
 *.original
 
-# Generic temporary files
+# Generic temporary files/directories
+tmp/
+temp/
 *.tmp
 *.temp
 *.temporary

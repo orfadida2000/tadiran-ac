@@ -3,6 +3,7 @@
 Adapted from rluvaton/ha-my-tadiran and used under the MIT License.
 See THIRD_PARTY_LICENSES/ha-my-tadiran-LICENSE.
 """
+
 from __future__ import annotations
 
 import base64
@@ -58,9 +59,7 @@ class TadiranAPI:
             COGNITO_URL,
             headers={
                 "Content-Type": "application/x-amz-json-1.1",
-                "X-Amz-Target": (
-                    f"AWSCognitoIdentityProviderService.{target}"
-                ),
+                "X-Amz-Target": (f"AWSCognitoIdentityProviderService.{target}"),
             },
             data=json.dumps(body),
         ) as resp:
@@ -137,9 +136,7 @@ class TadiranAPI:
 
         auth_result = resp.get("AuthenticationResult")
         if not auth_result:
-            raise TadiranAuthError(
-                "Refresh failed: no AuthenticationResult"
-            )
+            raise TadiranAuthError("Refresh failed: no AuthenticationResult")
 
         self._store_tokens(auth_result)
 
@@ -224,10 +221,7 @@ class TadiranAPI:
 
                 if resp.status >= 400:
                     body = await resp.text()
-                    raise TadiranAPIError(
-                        f"{method} {path} -> {resp.status}: "
-                        f"{body[:200]}"
-                    )
+                    raise TadiranAPIError(f"{method} {path} -> {resp.status}: {body[:200]}")
 
                 if resp.content_length == 0:
                     return None
@@ -247,10 +241,7 @@ class TadiranAPI:
         device_id: str,
         updates: dict[str, Any],
     ) -> Any:
-        body = [
-            {"name": key, "value": value}
-            for key, value in updates.items()
-        ]
+        body = [{"name": key, "value": value} for key, value in updates.items()]
 
         return await self._request(
             "PUT",

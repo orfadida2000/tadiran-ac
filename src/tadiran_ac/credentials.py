@@ -3,7 +3,6 @@ from __future__ import annotations
 import keyring
 from keyring.errors import KeyringError
 
-
 SERVICE_NAME = "tadiran-ac"
 
 

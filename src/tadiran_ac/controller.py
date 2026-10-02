@@ -4,7 +4,6 @@ from typing import Any
 
 from .my_tadiran.api import TadiranAPI
 
-
 BOOL_FIELDS = frozenset(
     {
         "power",
@@ -52,26 +51,19 @@ def resolve_device(
 
     if selector is not None:
         id_matches = [
-            device
-            for device in normalized_devices
-            if device.get("device_id") == selector
+            device for device in normalized_devices if device.get("device_id") == selector
         ]
         if id_matches:
             return id_matches[0]
 
-        name_matches = [
-            device
-            for device in normalized_devices
-            if device.get("name") == selector
-        ]
+        name_matches = [device for device in normalized_devices if device.get("name") == selector]
 
         if len(name_matches) == 1:
             return name_matches[0]
 
         if len(name_matches) > 1:
             raise DeviceSelectionError(
-                f"Multiple Tadiran ACs have the exact name {selector!r}. "
-                "Use a device ID instead."
+                f"Multiple Tadiran ACs have the exact name {selector!r}. Use a device ID instead."
             )
 
         raise DeviceSelectionError(
@@ -105,10 +97,7 @@ class TadiranController:
         self._default_device_id = default_device_id
 
     async def list_devices(self) -> list[dict[str, Any]]:
-        return [
-            normalize_device(device)
-            for device in await self._api.get_devices()
-        ]
+        return [normalize_device(device) for device in await self._api.get_devices()]
 
     async def get_device(self, selector: str | None) -> dict[str, Any]:
         devices = await self.list_devices()
@@ -127,9 +116,7 @@ class TadiranController:
         device_id = device.get("device_id")
 
         if not isinstance(device_id, str) or not device_id:
-            raise DeviceSelectionError(
-                "The selected device did not contain a usable device_id."
-            )
+            raise DeviceSelectionError("The selected device did not contain a usable device_id.")
 
         await self._api.update_device_shadow(device_id, updates)
         return device, updates
@@ -163,9 +150,7 @@ class TadiranController:
 
         device_id = device.get("device_id")
         if not isinstance(device_id, str) or not device_id:
-            raise DeviceSelectionError(
-                "The selected device did not contain a usable device_id."
-            )
+            raise DeviceSelectionError("The selected device did not contain a usable device_id.")
 
         updates = {field: value}
         await self._api.update_device_shadow(device_id, updates)

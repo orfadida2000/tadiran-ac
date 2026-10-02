@@ -7,7 +7,6 @@ from tadiran_ac.controller import (
     resolve_device,
 )
 
-
 DEVICES = [
     {
         "device_id": "id-a",

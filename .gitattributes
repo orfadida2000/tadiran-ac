@@ -1,0 +1,6 @@
+# Exclude Git and config files from release packages
+.gitattributes export-ignore
+.gitignore export-ignore
+
+# Assets
+assets/ export-ignore
